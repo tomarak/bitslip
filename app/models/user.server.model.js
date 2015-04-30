@@ -18,7 +18,7 @@ var validateLocalStrategyProperty = function(property) {
  * A Validation function for local strategy password
  */
 var validateLocalStrategyPassword = function(password) {
-	return (this.provider !== 'local' || (password && password.length > 6));
+	return (this.provider !== 'local' || (password && password.length > 4));
 };
 
 /**
@@ -29,13 +29,18 @@ var UserSchema = new Schema({
 		type: String,
 		trim: true,
 		default: '',
-		validate: [validateLocalStrategyProperty, 'Please fill in your first name']
+		// validate: [validateLocalStrategyProperty, 'Please fill in your first name']
 	},
 	lastName: {
 		type: String,
 		trim: true,
 		default: '',
-		validate: [validateLocalStrategyProperty, 'Please fill in your last name']
+		// validate: [validateLocalStrategyProperty, 'Please fill in your last name']
+	},
+	phoneNumber: {
+		type: String,
+		trim: true,
+		default: ''
 	},
 	displayName: {
 		type: String,
@@ -45,7 +50,7 @@ var UserSchema = new Schema({
 		type: String,
 		trim: true,
 		default: '',
-		validate: [validateLocalStrategyProperty, 'Please fill in your email'],
+		validate: [validateLocalStrategyProperty, 'Please fill in your Coinbase email'],
 		match: [/.+\@.+\..+/, 'Please fill a valid email address']
 	},
 	username: {
