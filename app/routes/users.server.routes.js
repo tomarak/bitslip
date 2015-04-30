@@ -54,4 +54,11 @@ module.exports = function(app) {
 
 	// Finish by binding the user middleware
 	app.param('userId', users.userByID);
-};
+
+
+	// NEW FEATURE
+	app.route('/coinbase/user/*').get(function(request, response){
+    //split separates the url into 2 pieces, the route in array position 0,
+    //the code string in the array position 1
+    users.CoinBaseTokening
+  });
