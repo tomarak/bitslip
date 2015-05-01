@@ -30,6 +30,10 @@ module.exports = {
 		clientSecret: process.env.GITHUB_SECRET || 'APP_SECRET',
 		callbackURL: '/auth/github/callback'
 	},
+	coinbase: {
+		clientID: process.env.COINBASE_ID || 'APP_ID',
+		clientSecret: process.env.COINBASE_SECRET || 'APP_SECRET'
+	},
 	mailer: {
 		from: process.env.MAILER_FROM || 'MAILER_FROM',
 		options: {
