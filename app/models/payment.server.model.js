@@ -8,7 +8,7 @@ var mongoose = require('mongoose'),
 
 /**
  * Payment Schema
- */
+ */ 
  /**
   sender UID
   recipient UID

@@ -5,6 +5,7 @@
  */
 var mongoose = require('mongoose'),
   errorHandler = require('./errors.server.controller'),
+  User = mongoose.model('User'),
   Payment = mongoose.model('Payment'),
   _ = require('lodash');
 
@@ -12,7 +13,14 @@ var mongoose = require('mongoose'),
  * Create a payment
  */
 exports.create = function(req, res) {
-  var payment = new Payment(req.body);
+
+  var payment = new Payment({
+    amount: req.body.amount,
+    message: req.body.message,
+    sendId: req.user._id,
+    recipientId: req.recipient._id
+
+  });
   payment.user = req.user;
 
   payment.save(function(err) {
@@ -26,6 +34,12 @@ exports.create = function(req, res) {
   });
 };
 
+exports.paymentAPIcall = function(req, res, next){
+
+  //Call to Coinbase here.  Req now has senderuser info under req.user and recipient into under req.recipient.  
+
+  next();
+}
 /**
  * Show the current payment
  */

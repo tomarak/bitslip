@@ -60,5 +60,6 @@ module.exports = function(app) {
 	app.route('/coinbase/user/*').get(function(request, response){
     //split separates the url into 2 pieces, the route in array position 0,
     //the code string in the array position 1
-    users.CoinBaseTokening
+    users.CoinBaseTokening;
   });
+};

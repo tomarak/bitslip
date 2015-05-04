@@ -21,6 +21,17 @@ exports.userByID = function(req, res, next, id) {
 	});
 };
 
+exports.userByUsername = function(req, res, next){	
+	var username = req.body.recipient;
+	User.findOne({
+		username: username
+	}).exec(function(err, user){
+		if(err)return next(err);
+		if(!user) return next(new Error('Failed to load User with username ' + username));
+		req.recipient = user;
+		next();
+	})
+}
 /**
  * Require login routing middleware
  */
