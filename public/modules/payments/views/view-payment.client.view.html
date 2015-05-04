@@ -1,0 +1,22 @@
+<section data-ng-controller="PaymentsController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1 data-ng-bind="payment.title"></h1>
+	</div>
+	<div class="pull-right" data-ng-show="authentication.user._id == payment.user._id">
+		<a class="btn btn-primary" href="/#!/payments/{{payment._id}}/edit">
+			<i class="glyphicon glyphicon-edit"></i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="remove();">
+			<i class="glyphicon glyphicon-trash"></i>
+		</a>
+	</div>
+	<small>
+		<em class="text-muted">
+			Posted on
+			<span data-ng-bind="payment.created | date:'mediumDate'"></span>
+			by
+			<span data-ng-bind="payment.user.displayName"></span>
+		</em>
+	</small>
+	<p class="lead" data-ng-bind="payment.content"></p>
+</section>
