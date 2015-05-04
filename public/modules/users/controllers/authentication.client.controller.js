@@ -24,8 +24,8 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 				// If successful we assign the response to the global user model
 				$scope.authentication.user = response;
 
-				// And redirect to the index page
-				$location.path('/');
+				// Super hacky way to redirect to new url, will replace later with angular redirect
+				window.location.replace('https://www.coinbase.com/sessions/oauth_signin?client_id=db0e75d4c1b0b7a2d22c2927280dc9ffcb478b904ee1b6d1df54d1c43f2cd4dc&meta%5Bsend_limit_amount%5D=50&redirect_uri=https%3A%2F%2Fbitslip.herokuapp.com%2Fcbredirect&response_type=code&scope=balance+send+transactions+user+reports');
 			}).error(function(response) {
 				$scope.error = response.message;
 			});

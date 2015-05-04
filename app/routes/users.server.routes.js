@@ -57,8 +57,7 @@ module.exports = function(app) {
 
 
 	// NEW FEATURE
-	app.route('/coinbase/user/*').get(function(request, response){
-    //split separates the url into 2 pieces, the route in array position 0,
-    //the code string in the array position 1
-    users.CoinBaseTokening
-  });
+	app.route('/cbredirect').get(function(req, res){
+		users.getCoinbaseToken(req, res);
+})
+}
