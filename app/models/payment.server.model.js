@@ -39,6 +39,11 @@ var PaymentSchema = new Schema({
   recipientId: {
     type: Schema.ObjectId,
     ref: 'User'
+  },
+  status: {
+    type: String,
+    default: 'pending'
+    //CB provides "pending" or "complete".  
   }
 });
 
