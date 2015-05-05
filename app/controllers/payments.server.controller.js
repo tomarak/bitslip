@@ -48,14 +48,20 @@ exports.paymentAPIcall = function(req, res, next){
       "amount": req.body.amount,
       "notes": req.body.message
     }
-  }
+  };
+
+  var jsonSend = JSON.stringify(sendingObject, 
+    function(key, value){
+      return value;
+    });
+
   //not sure if the object above will stringify the variables into string literals, log this
-  console.log("Stringified JSON object", JSON.stringify(sendingObject));
+  console.log("Stringified JSON object with replacer", jsonSend);
   request({
       method: "POST",
       url: coinbaseUrl,
-      json: true,
-      body: sendingObject
+      'content-type': 'application/json',
+      body: jsonSend
     })
     .on('response', function(response){
       //recieved response is a JSON object
