@@ -40,6 +40,7 @@ exports.paymentAPIcall = function(req, res, next){
   // console.log(req.user);
   // console.log(req.recipient);
   //accessToken is attached to URL we use the make request
+  console.log("API FOR PAYMENT HAS BEEN CALLED WITH REQ/RES:", req, res);
   var coinbaseUrl = 'https://api.coinbase.com/v1/transactions/send_money?access_token='+req.user.accessToken;
   //Standard request format for sending money on Coinbase
   var sendingObject = {
