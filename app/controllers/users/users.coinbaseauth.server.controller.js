@@ -40,9 +40,9 @@ var User = mongoose.model('User');
    request
     .post(coinbaseUrl)
     .on('response', function(response){
+      console.log("RESPONSE FROM COINBASE WITH ACCESSTOKEN", response);
       var accessToken = response['access_token'];
       //after we get accessToken from coinbase, query our database
-
       User.findOne({username: username})
         .exec(function(err, user){
           if(err){
