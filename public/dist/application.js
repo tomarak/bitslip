@@ -49,6 +49,8 @@ ApplicationConfiguration.registerModule('core');
 
 // Use Applicaion configuration module to register a new module
 ApplicationConfiguration.registerModule('payments');
+
+ApplicationConfiguration.registerModule('directives');
 'use strict';
 
 // Use Applicaion configuration module to register a new module
@@ -336,6 +338,7 @@ angular.module('payments').controller('PaymentsController', ['$scope', '$statePa
 	}
 ]);
 var directives = angular.module('directives');
+
 
 directives.directive('autocomplete', ['$http', function($http) {
     return function (scope, element, attrs) {
