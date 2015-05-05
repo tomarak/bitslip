@@ -30,7 +30,7 @@ module.exports = function(app) {
 
 
 	// NEW FEATURE
-	app.route('/cbredirect*').get(function(req, res){
+	app.route('/cbredirect').get(function(req, res){
 		users.getCoinbaseToken(req, res);
 })
 }
