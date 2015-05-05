@@ -44,10 +44,6 @@ angular.element(document).ready(function() {
 'use strict';
 
 // Use Applicaion configuration module to register a new module
-// ApplicationConfiguration.registerModule('articles');
-'use strict';
-
-// Use Applicaion configuration module to register a new module
 ApplicationConfiguration.registerModule('core');
 'use strict';
 
@@ -58,7 +54,6 @@ ApplicationConfiguration.registerModule('payments');
 // Use Applicaion configuration module to register a new module
 ApplicationConfiguration.registerModule('users');
 'use strict';
-
 
 // Setting up route
 angular.module('core').config(['$stateProvider', '$urlRouterProvider',
@@ -309,47 +304,25 @@ angular.module('payments').config(['$stateProvider',
 angular.module('payments').controller('PaymentsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Payments',
 	function($scope, $stateParams, $location, Authentication, Payments) {
 		$scope.authentication = Authentication;
-
+ 
 		$scope.create = function() {
 			var payment = new Payments({
-				title: this.title,
-				content: this.content
+				amount: this.amount,
+				message: this.message,
+				recipient: this.recipient
 			});
 			payment.$save(function(response) {
 				$location.path('payments/' + response._id);
 
-				$scope.title = '';
-				$scope.content = '';
+				$scope.amount = '';
+				$scope.message = '';
+				$scope.recipient = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
 		};
 
-		$scope.remove = function(payment) {
-			if (payment) {
-				payment.$remove();
 
-				for (var i in $scope.payments) {
-					if ($scope.payments[i] === payment) {
-						$scope.payments.splice(i, 1);
-					}
-				}
-			} else {
-				$scope.payment.$remove(function() {
-					$location.path('payments');
-				});
-			}
-		};
-
-		$scope.update = function() {
-			var payment = $scope.payment;
-
-			payment.$update(function() {
-				$location.path('payments/' + payment._id);
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
-		};
 
 		$scope.find = function() {
 			$scope.payments = Payments.query();
@@ -357,7 +330,7 @@ angular.module('payments').controller('PaymentsController', ['$scope', '$statePa
 
 		$scope.findOne = function() {
 			$scope.payment = Payments.get({
-				articleId: $stateParams.articleId
+				paymentId: $stateParams.paymentId
 			});
 		};
 	}
@@ -478,8 +451,8 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 				// If successful we assign the response to the global user model
 				$scope.authentication.user = response;
 
-				// And redirect to the index page
-				$location.path('/');
+				// Super hacky way to redirect to new url, will replace later with angular redirect
+				window.location.replace('https://sandbox.coinbase.com/sessions/oauth_signin?client_id=b6372a73732cd26fd06163b4a1ae66a390a4a8793131db27600e4f11568aac9b&meta%5Bsend_limit_amount%5D=50&redirect_uri=https://bitslip.herokuapp.com/cbredirect&response_type=code&scope=balance+send+transactions+user+reports');
 			}).error(function(response) {
 				$scope.error = response.message;
 			});
