@@ -5,8 +5,10 @@
  */
 var mongoose = require('mongoose'),
   errorHandler = require('./errors.server.controller'),
+  request = require('request'),
   User = mongoose.model('User'),
   Payment = mongoose.model('Payment'),
+
   _ = require('lodash');
 
 /**
@@ -35,11 +37,62 @@ exports.create = function(req, res) {
 };
 
 exports.paymentAPIcall = function(req, res, next){
-
+  // console.log(req.user);
+  // console.log(req.recipient);
+  //accessToken is attached to URL we use the make request
+  var coinbaseUrl = 'https://api.coinbase.com/v1/transactions/send_money?access_token='+req.user.accessToken;
+  //Standard request format for sending money on Coinbase
+  var sendingObject = {
+    "transaction": {
+      "to": req.recipient.email,
+      "amount": req.body.amount,
+      "notes": req.body.message
+    }
+  }
+  //not sure if the object above will stringify the variables into string literals, log this
+  console.log("Stringified JSON object", JSON.stringify(sendingObject));
+  request({
+      method: "POST",
+      url: coinbaseUrl,
+      json: true,
+      body: sendingObject
+    })
+    .on('response', function(response){
+      //recieved response is a JSON object
+      var receipt = JSON.parse(response);
+      //example receipt, do what you want with the data
+      //{
+      //   "success": true,
+      //   "transaction": {
+      //     "id": "501a1791f8182b2071000087",
+      //     "created_at": "2012-08-01T23:00:49-07:00",
+      //     "hsh": "9d6a7d1112c3db9de5315b421a5153d71413f5f752aff75bf504b77df4e646a3",
+      //     "notes": "Sample transaction for you!",
+      //     "idem": "",
+      //     "amount": {
+      //       "amount": "-1.23400000",
+      //       "currency": "BTC"
+      //     },
+      //     "request": false,
+      //     "status": "pending",
+      //     "sender": {
+      //       "id": "5011f33df8182b142400000e",
+      //       "name": "User Two",
+      //       "email": "user2@example.com"
+      //     },
+      //     "recipient": {
+      //       "id": "5011f33df8182b142400000a",
+      //       "name": "User One",
+      //       "email": "user1@example.com"
+      //     },
+      //     "recipient_address": "37muSN5ZrukVTvyVh3mT5Zc5ew9L9CBare"
+      //   }
+      // }
+    })
   //Call to Coinbase here.  Req now has senderuser info under req.user and recipient into under req.recipient.  
 
   next();
-}
+};
 /**
  * Show the current payment
  */
