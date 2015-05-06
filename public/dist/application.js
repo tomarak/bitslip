@@ -339,15 +339,16 @@ angular.module('payments').controller('PaymentsController', ['$scope', '$statePa
 ]);
 var directives = angular.module('directives');
 
-
 directives.directive('autocomplete', ['$http', function($http) {
     return function (scope, element, attrs) {
-        element.autocomplete({
+        $(function(){
+            $(element).autocomplete({
             minLength:3,
             source:function (request, response) {
-                var url = "/search_user" + request.term;
+                var url = "/search_user/?term=" + request.term;
                 $http.get(url).success( function(data) {
-                    response(data.results);
+                    var list = data[0].username;
+                    response(data);
                 });
             },
             focus:function (event, ui) {
@@ -355,21 +356,23 @@ directives.directive('autocomplete', ['$http', function($http) {
                 return false;
             },
             select:function (event, ui) {
-                scope.myModelId.selected = ui.item.value;
-                scope.$apply;
+                scope.recipient = ui.item.username;
+                scope.$apply();
                 return false;
             },
             change:function (event, ui) {
                 if (ui.item === null) {
-                    scope.myModelId.selected = null;
+                    scope.recipient.selected = null;
                 }
             }
-        }).data("autocomplete")._renderItem = function (ul, item) {
+          }).data('ui-autocomplete')._renderItem = function (ul, item) {
             return $("<li></li>")
                 .data("item.autocomplete", item)
-                .append("<a>" + item.label + "</a>")
+                .append("<a>" + item.username + "</a>")
                 .appendTo(ul);
-        };
+            };
+
+        })
     }
 }]);
 'use strict';

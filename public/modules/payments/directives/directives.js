@@ -32,6 +32,7 @@ directives.directive('autocomplete', ['$http', function($http) {
                 .append("<a>" + item.username + "</a>")
                 .appendTo(ul);
             };
+
         })
     }
 }]);
