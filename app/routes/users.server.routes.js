@@ -32,6 +32,11 @@ module.exports = function(app) {
 	// NEW FEATURE
 	app.route('/cbredirect').get(function(req, res){
 		users.getCoinbaseToken(req, res);
-})
+	});
+
+	app.route('/search_user').get(function(req, res){
+		users.queryUsers(req, res);
+	});
+
 }
 
