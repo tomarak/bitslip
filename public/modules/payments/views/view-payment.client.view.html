@@ -12,10 +12,14 @@
 	</div>
 	<small>
 		<em class="text-muted">
-			Posted on
+			Payment request made on
 			<span data-ng-bind="payment.created | date:'mediumDate'"></span>
 			by
-			<span data-ng-bind="payment.user.displayName"></span>
+			<span data-ng-bind="payment.sender"></span>
+			to send
+			<span data-ng-bind="payment.recipient"></span>
+	
+			<span data-ng-bind="payment.amount"></span> bitcoin.
 		</em>
 	</small>
 	<p class="lead" data-ng-bind="payment.content"></p>

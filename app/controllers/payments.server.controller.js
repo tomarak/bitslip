@@ -101,10 +101,18 @@ exports.paymentAPIcall = function(req, res, next){
   next();
 };
 /**
- * Show the current payment
+ * Show the current payment with sender name and recipient name
  */
+
 exports.read = function(req, res) {
-  res.json(req.payment);
+  var response = {
+    amount: req.payment.amount,
+    recipient: req.payment.recipient,
+    sender: req.payment.sender,
+    created: req.payment.created
+  };
+
+  res.json(response);
 };
 
 /**

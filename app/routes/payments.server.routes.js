@@ -12,8 +12,9 @@ module.exports = function(app) {
     .get(payments.list)
     .post(users.requiresLogin, users.userByUsername, payments.paymentAPIcall, payments.create);
 
+    //rout to show individual payment.  Middleware converts senderId and recipientId into usernames
   app.route('/payments/:paymentId')
-    .get(payments.read);
+    .get(users.senderByID, users.recipientByID, payments.read);
     // .put(users.requiresLogin, payments.hasAuthorization, payments.update)
     // .delete(users.requiresLogin, payments.hasAuthorization, payments.delete);
 
