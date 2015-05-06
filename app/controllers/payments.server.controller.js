@@ -153,10 +153,11 @@ exports.delete = function(req, res) {
 
 /**
  * List of payments.  Populate converts sendId and recipientId to usernames.
-    The argument passed to find limits the results to payments made by the user currently signed in.
+    The argument passed to find limits the results to payments made BY the user currently signed in
+    or made TO the user currently signed in.
  */
 exports.list = function(req, res) {
-  Payment.find({sendId: req.user._id }).sort('-created').populate('sendId', 'username').populate('recipientId', 'username').exec(function(err, payments) {
+  Payment.find({ $or: [{recipientId: req.user._id}, {sendId: req.user._id}]}).sort('-created').populate('sendId', 'username').populate('recipientId', 'username').exec(function(err, payments) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
