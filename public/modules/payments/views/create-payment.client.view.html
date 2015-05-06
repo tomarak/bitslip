@@ -17,8 +17,12 @@
 				<div class="form-group col-md-2" ng-class="{ 'has-error': paymentForm.amount.$dirty && paymentForm.amount.$invalid }">
 					<label class="control-label" for="amount">Amount (btc)</label>
 					<div class="controls">
-						<input name="amount" type="text" data-ng-model="amount" id="amount" class="form-control" placeholder="amount" required>
-					</div>	
+						<input name="amount" type="number" data-ng-model="amount" id="amount" class="form-control" placeholder="amount" required>
+					</div>
+
+					  <span class="error" ng-show="paymentForm.amount.$error.number">
+      				Not valid number!</span>
+
 				</div>
 
 				<div class="col-md-3"></div>
