@@ -14,13 +14,22 @@
 	border-color: #78FA89;
 }
 
-/*#homepage {
-  background-image: none;
-  background-color: green;
-}*/
 
 .form-horizontal-payment {
   background-color: rgba(128, 128, 128, 0.18);
   border: 3px solid ghostwhite;
   border-radius: 10px;
+}
+
+.ui-autocomplete {
+  list-style-type: none;
+  background-color: white;
+  width: 20%;
+  max-height: 100px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.ui-helper-hidden-accessible {
+  visibility: hidden;
 }

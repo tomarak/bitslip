@@ -101,10 +101,18 @@ exports.paymentAPIcall = function(req, res, next){
   next();
 };
 /**
- * Show the current payment
+ * Show the current payment with sender name and recipient name
  */
+
 exports.read = function(req, res) {
-  res.json(req.payment);
+  var response = {
+    amount: req.payment.amount,
+    recipient: req.payment.recipient,
+    sender: req.payment.sender,
+    created: req.payment.created
+  };
+
+  res.json(response);
 };
 
 /**
@@ -144,10 +152,12 @@ exports.delete = function(req, res) {
 };
 
 /**
- * List of payments
+ * List of payments.  Populate converts sendId and recipientId to usernames.
+    The argument passed to find limits the results to payments made BY the user currently signed in
+    or made TO the user currently signed in.
  */
 exports.list = function(req, res) {
-  Payment.find().sort('-created').populate('user', 'displayName').exec(function(err, payments) {
+  Payment.find({ $or: [{recipientId: req.user._id}, {sendId: req.user._id}]}).sort('-created').populate('sendId', 'username').populate('recipientId', 'username').exec(function(err, payments) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)

@@ -23,7 +23,7 @@ var PaymentSchema = new Schema({
   },
   amount: {
     type: Number,
-    default: '',
+    default: 0,
     trim: true,
     required: 'Amount cannot be blank'
   },

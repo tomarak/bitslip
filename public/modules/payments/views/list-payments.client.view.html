@@ -5,16 +5,20 @@
 	<div class="list-group">
 		<a data-ng-repeat="payment in payments" data-ng-href="#!/payments/{{payment._id}}" class="list-group-item">
 			<small class="list-group-item-text">
-				Posted on
+				Payment made on
 				<span data-ng-bind="payment.created | date:'mediumDate'"></span>
 				by
-				<span data-ng-bind="payment.user.displayName"></span>
+				<span data-ng-bind="payment.sendId.username"></span>
+				to
+				<span data-ng-bind="payment.recipientId.username"></span>
+				in the amount of
+				<span data-ng-bind="payment.amount"></span>
 			</small>
 			<h4 class="list-group-item-heading" data-ng-bind="payment.title"></h4>
 			<p class="list-group-item-text" data-ng-bind="payment.content"></p>
 		</a>
 	</div>
 	<div class="alert alert-warning text-center" data-ng-if="payments.$resolved && !payments.length">
-		No payments yet, why don't you <a href="/#!/payments/create">create one</a>?
+		No payments yet, why don't you <a href="/#!/payments/create">send one</a>?
 	</div>
 </section>

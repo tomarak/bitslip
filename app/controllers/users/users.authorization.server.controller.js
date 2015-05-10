@@ -21,6 +21,35 @@ exports.userByID = function(req, res, next, id) {
 	});
 };
 
+//Convert payment senderId into sender username
+
+exports.senderByID = function(req, res, next) {
+	User.findOne({
+		_id: req.payment.sendId
+	}).exec(function(err, user) {
+		if (err) return next(err);
+		if (!user) return next(new Error('Failed to load User ' + id));
+		req.payment.sender = user.username;
+		next();
+	});
+};
+
+//Convert payment recipientId into recipient username
+
+exports.recipientByID = function(req, res, next) {
+	User.findOne({
+		_id: req.payment.recipientId
+	}).exec(function(err, user) {
+		if (err) return next(err);
+		if (!user) return next(new Error('Failed to load User ' + id));
+		req.payment.recipient = user.username;
+		next();
+	});
+};
+
+
+
+
 exports.userByUsername = function(req, res, next){	
 	var username = req.body.recipient;
 	User.findOne({

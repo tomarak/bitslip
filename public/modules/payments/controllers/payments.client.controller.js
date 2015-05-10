@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('payments').controller('PaymentsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Payments',
-	function($scope, $stateParams, $location, Authentication, Payments) {
+angular.module('payments').controller('PaymentsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Payments', 'Users',
+	function($scope, $stateParams, $location, Authentication, Payments, Users) {
 		$scope.authentication = Authentication;
  
 		$scope.create = function() {
@@ -13,7 +13,7 @@ angular.module('payments').controller('PaymentsController', ['$scope', '$statePa
 			payment.$save(function(response) {
 				$location.path('payments/' + response._id);
 
-				$scope.amount = '';
+				$scope.amount = 0;
 				$scope.message = '';
 				$scope.recipient = '';
 			}, function(errorResponse) {

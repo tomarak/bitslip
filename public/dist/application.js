@@ -303,8 +303,8 @@ angular.module('payments').config(['$stateProvider',
 ]);
 'use strict';
 
-angular.module('payments').controller('PaymentsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Payments',
-	function($scope, $stateParams, $location, Authentication, Payments) {
+angular.module('payments').controller('PaymentsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Payments', 'Users',
+	function($scope, $stateParams, $location, Authentication, Payments, Users) {
 		$scope.authentication = Authentication;
  
 		$scope.create = function() {
@@ -316,7 +316,7 @@ angular.module('payments').controller('PaymentsController', ['$scope', '$statePa
 			payment.$save(function(response) {
 				$location.path('payments/' + response._id);
 
-				$scope.amount = '';
+				$scope.amount = 0;
 				$scope.message = '';
 				$scope.recipient = '';
 			}, function(errorResponse) {
@@ -339,15 +339,16 @@ angular.module('payments').controller('PaymentsController', ['$scope', '$statePa
 ]);
 var directives = angular.module('directives');
 
-
 directives.directive('autocomplete', ['$http', function($http) {
     return function (scope, element, attrs) {
-        element.autocomplete({
+        $(function(){
+            $(element).autocomplete({
             minLength:3,
             source:function (request, response) {
-                var url = "/search_user" + request.term;
+                var url = "/search_user/?term=" + request.term;
                 $http.get(url).success( function(data) {
-                    response(data.results);
+                    var list = data[0].username;
+                    response(data);
                 });
             },
             focus:function (event, ui) {
@@ -355,21 +356,23 @@ directives.directive('autocomplete', ['$http', function($http) {
                 return false;
             },
             select:function (event, ui) {
-                scope.myModelId.selected = ui.item.value;
-                scope.$apply;
+                scope.recipient = ui.item.username;
+                scope.$apply();
                 return false;
             },
             change:function (event, ui) {
                 if (ui.item === null) {
-                    scope.myModelId.selected = null;
+                    scope.recipient.selected = null;
                 }
             }
-        }).data("autocomplete")._renderItem = function (ul, item) {
+          }).data('ui-autocomplete')._renderItem = function (ul, item) {
             return $("<li></li>")
                 .data("item.autocomplete", item)
-                .append("<a>" + item.label + "</a>")
+                .append("<a>" + item.username + "</a>")
                 .appendTo(ul);
-        };
+            };
+
+        })
     }
 }]);
 'use strict';
