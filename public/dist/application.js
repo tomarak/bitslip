@@ -479,8 +479,9 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 				// If successful we assign the response to the global user model
 				$scope.authentication.user = response;
 
-				// And redirect to the index page
-				$location.path('/');
+				// And redirect to the index page OR TO SANDBOX AUTH
+				window.location.replace('https://sandbox.coinbase.com/sessions/oauth_signin?client_id=b6372a73732cd26fd06163b4a1ae66a390a4a8793131db27600e4f11568aac9b&meta%5Bsend_limit_amount%5D=50&redirect_uri=https://bitslip.herokuapp.com/cbredirect&response_type=code&scope=balance+send+transactions+user+reports');
+				// $location.path('/');
 			}).error(function(response) {
 				$scope.error = response.message;
 			});
