@@ -57,6 +57,9 @@ exports.paymentAPIcall = function(req, res, next){
     body: jsonSend
     }, function(error, response, body){
       //recieved response is a JSON object
+
+      var receipt = JSON.parse(response);
+
       next();
     });
       //example receipt, do what you want with the data
