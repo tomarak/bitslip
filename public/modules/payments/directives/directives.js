@@ -10,7 +10,10 @@ directives.directive('autocomplete', ['$http', function($http) {
             source:function (request, response) {
                 var url = '/search_user/?term=' + request.term;
                 $http.get(url).success( function(data) {
-                    var list = data[0].username;
+                    for(var i=0; i< data.length; i++){
+                        scope.validUsernames.push(data[i].username);
+                    }
+                    console.log(scope.validUsernames);
                     response(data);
                 });
             },
