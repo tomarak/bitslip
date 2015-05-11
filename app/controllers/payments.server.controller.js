@@ -37,11 +37,6 @@ exports.create = function(req, res) {
 };
 
 exports.paymentAPIcall = function(req, res, next){
-  // console.log(req.user);
-  // console.log(req.recipient);
-  //accessToken is attached to URL we use the make request
-  console.log("API FOR PAYMENT HAS BEEN CALLED WITH REQ/RES:", req, res);
-  var coinbaseUrl = 'https://api.sandbox.coinbase.com/v1/transactions/send_money?access_token='+req.user.accessToken;
   //Standard request format for sending money on Coinbase
   var sendingObject = {
     "transaction": {
@@ -57,16 +52,14 @@ exports.paymentAPIcall = function(req, res, next){
     });
 
   //not sure if the object above will stringify the variables into string literals, log this
-  console.log("Stringified JSON object with replacer", jsonSend);
-  request({
-      method: "POST",
-      url: coinbaseUrl,
-      'content-type': 'application/json',
-      body: jsonSend
-    })
-    .on('response', function(response){
+  request.post({
+    url: "https://api.sandbox.coinbase.com/v1/transactions/send_money?access_token=" + req.user.accessToken,
+    body: jsonSend
+    }, function(error, response, body){
       //recieved response is a JSON object
       var receipt = JSON.parse(response);
+      next();
+    })
       //example receipt, do what you want with the data
       //{
       //   "success": true,
@@ -95,10 +88,6 @@ exports.paymentAPIcall = function(req, res, next){
       //     "recipient_address": "37muSN5ZrukVTvyVh3mT5Zc5ew9L9CBare"
       //   }
       // }
-    })
-  //Call to Coinbase here.  Req now has senderuser info under req.user and recipient into under req.recipient.  
-
-  next();
 };
 /**
  * Show the current payment with sender name and recipient name
