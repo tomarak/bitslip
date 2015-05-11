@@ -1,11 +1,11 @@
+'use strict';
 
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 
-
 exports.queryUsers = function(req, res) {
-  var regex = new RegExp(req.query["term"], 'i');
-  var query = User.find({username: regex}, { 'username': 1 }).sort({"updated_at":-1}).sort({"created_at":-1}).limit(20);
+  var regex = new RegExp(req.query.term, 'i');
+  var query = User.find({username: regex}, { 'username': 1 }).sort({'updated_at':-1}).sort({'created_at':-1}).limit(20);
   var buildResultSet = function(docs){
     var result = [];
     for(var object in docs){

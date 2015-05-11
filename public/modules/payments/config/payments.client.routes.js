@@ -13,8 +13,7 @@ angular.module('payments').config(['$stateProvider',
 			url: '/payments/create',
 			templateUrl: 'modules/payments/views/create-payment.client.view.html'
 		}).
-		state('viewPayment'
-			, {
+		state('viewPayment', {
 			url: '/payments/:paymentId',
 			templateUrl: 'modules/payments/views/view-payment.client.view.html'
 		}).

@@ -53,7 +53,7 @@
 		it('$scope.find() should create an array with at least one payment object fetched from XHR', inject(function(Payments) {
 			// Create sample payment using the Payments service
 			var samplePayment = new Payments({
-				message: "here's your coin, peasant",
+				message: 'here\'s your coin, peasant',
 				amount: 38747
 			});
 
@@ -74,7 +74,7 @@
 		it('$scope.findOne() should create an array with one payment object fetched from XHR using a PaymentId URL parameter', inject(function(Payments) {
 			// Define a sample payment object
 			var samplePayment = new Payments({
-				message: "here's your coin, peasant",
+				message: 'here\'s your coin, peasant',
 				amount: 38747
 			});
 
@@ -95,19 +95,19 @@
 		it('$scope.create() with valid form data should send a POST request with the form input values and then locate to new object URL', inject(function(Payments) {
 			// Create a sample payment object
 			var samplePaymentPostData = new Payments({
-				message: "here's your coin, peasant",
+				message: 'here\'s your coin, peasant',
 				amount: 38747
 			});
 
 			// Create a sample payment response
 			var samplePaymentResponse = new Payments({
 				_id: '525cf20451979dea2c000001',
-				message: "here's your coin, peasant",
+				message: 'here\'s your coin, peasant',
 				amount: 38747
 			});
 
 			// Fixture mock form input values
-			scope.message = "here's your coin, peasant";
+			scope.message = 'here\'s your coin, peasant';
 			scope.amount = 38747;
 
 			// Set POST response
