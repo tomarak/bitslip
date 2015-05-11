@@ -39,10 +39,10 @@ exports.create = function(req, res) {
 exports.paymentAPIcall = function(req, res, next){
   //Standard request format for sending money on Coinbase
   var sendingObject = {
-    "transaction": {
-      "to": req.recipient.email,
-      "amount": req.body.amount,
-      "notes": req.body.message
+    'transaction': {
+      'to': req.recipient.email,
+      'amount': req.body.amount,
+      'notes': req.body.message
     }
   };
 
@@ -53,13 +53,14 @@ exports.paymentAPIcall = function(req, res, next){
 
   //not sure if the object above will stringify the variables into string literals, log this
   request.post({
-    url: "https://api.sandbox.coinbase.com/v1/transactions/send_money?access_token=" + req.user.accessToken,
+    url: 'https://api.sandbox.coinbase.com/v1/transactions/send_money?access_token=' + req.user.accessToken,
     body: jsonSend
     }, function(error, response, body){
       //recieved response is a JSON object
       var receipt = JSON.parse(response);
+      
       next();
-    })
+    });
       //example receipt, do what you want with the data
       //{
       //   "success": true,

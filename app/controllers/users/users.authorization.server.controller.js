@@ -59,8 +59,8 @@ exports.userByUsername = function(req, res, next){
 		if(!user) return next(new Error('Failed to load User with username ' + username));
 		req.recipient = user;
 		next();
-	})
-}
+	});
+};
 /**
  * Require login routing middleware
  */

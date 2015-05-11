@@ -38,5 +38,5 @@ module.exports = function(app) {
 		users.queryUsers(req, res);
 	});
 
-}
+};
 

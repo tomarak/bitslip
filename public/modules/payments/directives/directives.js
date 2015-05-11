@@ -1,3 +1,5 @@
+'use strict';
+
 var directives = angular.module('directives');
 
 directives.directive('autocomplete', ['$http', function($http) {
@@ -6,7 +8,7 @@ directives.directive('autocomplete', ['$http', function($http) {
             $(element).autocomplete({
             minLength:3,
             source:function (request, response) {
-                var url = "/search_user/?term=" + request.term;
+                var url = '/search_user/?term=' + request.term;
                 $http.get(url).success( function(data) {
                     var list = data[0].username;
                     response(data);
@@ -27,12 +29,12 @@ directives.directive('autocomplete', ['$http', function($http) {
                 }
             }
           }).data('ui-autocomplete')._renderItem = function (ul, item) {
-            return $("<li></li>")
-                .data("item.autocomplete", item)
-                .append("<a>" + item.username + "</a>")
+            return $('<li></li>')
+                .data('item.autocomplete', item)
+                .append('<a>' + item.username + '</a>')
                 .appendTo(ul);
             };
 
-        })
-    }
+        });
+    };
 }]);
