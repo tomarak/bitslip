@@ -12,7 +12,7 @@ var User = mongoose.model('User');
     var splitUrl = req.url.split('?code=');
     var code = splitUrl[1];
     var username = req.user.username;
-    var callbackurl = 'https://bitslip.herokuapp.com/cbredirect';
+    var callbackurl = 'https://bitsliptest.herokuapp.com/cbredirect';
     var clientID = 'b6372a73732cd26fd06163b4a1ae66a390a4a8793131db27600e4f11568aac9b';
     var clientsecret = 'fc1c3ddf529789bb7065adfb238c1ab23410bd705586a309e3af8f2cddcf2165';
 
