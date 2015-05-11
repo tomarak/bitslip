@@ -33,3 +33,102 @@
 .ui-helper-hidden-accessible {
   visibility: hidden;
 }
+
+
+.splash-welcome{
+  padding-top: 100px;
+  background: url('../img/brand/BackgroundBlur.png') no-repeat center center fixed;
+  background-size: cover;
+  width: 100%;
+  height: auto;
+  padding-bottom:300px;
+}
+
+.jumbotron{
+  background: rgba(201,195,223,0.19);
+  border-radius: 39px;
+  width: 60%;
+  margin: 0 auto;
+}
+
+.main-btn{
+  /* Button Background: */
+  margin: 10px 30px;
+  display: inline-block;
+  width: 125px;
+  padding:10px;
+  background-image: linear-gradient(-180deg, #55C34D 0%, #89CB44 100%);
+  border-radius: 2px;
+  font-family: HelveticaNeue-Thin;
+  font-size: 22px;
+  color: #EFEFEF;
+  line-height: 27px;
+  /* Button Background: */
+}
+
+.welcome-btn{
+  margin-top: 10px;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.welcome-h1{
+  font-family: Helvetica;
+  font-size: 43px;
+  color: #FFFFFF;
+  line-height: 30px;
+  text-shadow: -4px 2px 10px rgba(0,0,0,0.50);
+  margin-bottom: 25px;
+}
+
+.introduction{
+  /* Send Bitcoin to anyo: */
+  font-family: HelveticaNeue-ThinItalic;
+  font-size: 26px;
+  color: #F1F1F1;
+  line-height: 32px;
+  text-shadow: 0px 2px 4px rgba(0,0,0,0.50);
+  margin-bottom: 10px ;
+}
+
+.nav-element{
+  text-shadow: none !important;
+  font-family: AvenirNext-UltraLight;
+  font-size: 26px;
+  color: #FFFFFF;
+  line-height: 36px;
+}
+
+.nav-element a span{
+  color: #FFFFFF;
+}
+
+
+.nav-element a b{
+  color: #FFFFFF;
+}
+.nav-bar{
+  /* Rectangle 28: */
+  /*background: #9CCDA0;*/
+  border: 0;
+  padding: 10px;
+}
+.nav-logo{
+  position: absolute;
+  top: 10px;
+  height: 50px;
+}
+
+.navbar-brand{
+  padding-right: 100px;
+}
+
+
+
+.page-header h1{
+  /* Payments: */
+  font-family: HelveticaNeue-Thin;
+  font-size: 35.25px;
+  color: black;
+  line-height: 43px;
+}
