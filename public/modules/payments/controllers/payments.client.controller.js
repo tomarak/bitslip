@@ -3,7 +3,7 @@
 angular.module('payments').controller('PaymentsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Payments', 'Users',
 	function($scope, $stateParams, $location, Authentication, Payments, Users) {
 		$scope.authentication = Authentication;
- 
+ 	
 		$scope.create = function() {
 			var payment = new Payments({
 				amount: this.amount,
