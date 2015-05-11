@@ -72,6 +72,7 @@ exports.revokeToken = function(req, res){
               console.log(error);
             }
             else{
+              console.log("REVOKED =====================================")
               user.accessToken = null;
             }
           })
