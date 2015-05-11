@@ -59,6 +59,7 @@ exports.paymentAPIcall = function(req, res, next){
       //recieved response is a JSON object
 
       var receipt = JSON.parse(response);
+
       next();
     });
       //example receipt, do what you want with the data
