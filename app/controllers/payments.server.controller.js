@@ -62,7 +62,7 @@ exports.paymentAPIcall = function(req, res, next){
       // var receipt = JSON.parse(response);
 
       var receipt = JSON.parse(response);
-      // restores receipt variable
+      restores receipt variable
       next();
     });
       //example receipt, do what you want with the data
