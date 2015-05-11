@@ -66,8 +66,8 @@ exports.revokeToken = function(req, res){
               user.accessToken = null;
               user.save();
             }
-          })
+          });
       }
-    })
+    });
   
-}
+};
