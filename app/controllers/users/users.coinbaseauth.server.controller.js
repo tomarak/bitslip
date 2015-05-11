@@ -63,6 +63,10 @@ exports.revokeToken = function(req, res){
             if(error){
               console.log(error);
             }
+            else{
+              user.accessToken = null;
+              user.save();
+            }
           })
       }
     })
