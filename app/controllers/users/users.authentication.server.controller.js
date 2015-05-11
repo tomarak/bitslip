@@ -8,6 +8,7 @@ var _ = require('lodash'),
 	mongoose = require('mongoose'),
 	passport = require('passport'),
 	User = mongoose.model('User');
+	coinbase = require('./users.coinbaseauth.server.controller');
 
 /**
  * Signup
@@ -73,6 +74,7 @@ exports.signin = function(req, res, next) {
  * Signout
  */
 exports.signout = function(req, res) {
+	coinbase.revokeToken(req, res);
 	req.logout();
 	res.redirect('/');
 };
