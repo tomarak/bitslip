@@ -42,6 +42,7 @@ var User = mongoose.model('User');
     });
   };
 
+
 exports.revokeToken = function(req, res){
 
   var username = req.user.username;
@@ -72,3 +73,4 @@ exports.revokeToken = function(req, res){
     })
   
 }
+
