@@ -21,7 +21,16 @@ angular.module('payments').controller('PaymentsController', ['$scope', '$statePa
 			});
 		};
 
+		$scope.validUsernames = [];
 
+		$scope.validateUsername = function(){
+			console.log("in validate");
+			if($scope.validUsernames.indexOf($scope.recipient) > -1){
+				return true;
+			} else {
+				return "Needs to be valid recipient";
+			}
+		}
 
 		$scope.find = function() {
 			$scope.payments = Payments.query();
