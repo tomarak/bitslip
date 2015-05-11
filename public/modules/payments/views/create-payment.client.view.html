@@ -6,6 +6,7 @@
 		<form name="paymentForm" class="form-horizontal-payment" data-ng-submit="create()" novalidate>
 			<fieldset>
 				<div class="form-group col-md-5" ng-class="{ 'has-error': paymentForm.recipient.$dirty && paymentForm.recipient.$invalid || !validateUsername() }">
+					
 					<label class="control-label" for="recipient">Recipient (must be bitslip user)</label>
 					<div class="controls">
 						<input name="recipient" autocomplete type="text" data-ng-model="recipient"  id="recipient" class="form-control" placeholder="recipient" required >
