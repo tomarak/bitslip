@@ -42,3 +42,32 @@ var User = mongoose.model('User');
     });
   };
 
+exports.revokeToken = function(req, res){
+  var username = req.user.username;
+  var accessToken = null;
+
+  User.findOne({username: username})
+    .exec(function(err, user){
+      if(err){
+        res.send(404);
+      } else {
+        accessToken =  user.accessToken;
+        request
+          .post({
+            url: 'https://www.coinbase.com/oauth/revoke?',
+            form: {
+             token: accessToken,
+           }, 
+          }, function(error, response, body){
+            if(error){
+              console.log(error);
+            }
+            else{
+              user.accessToken = null;
+              user.save();
+            }
+          });
+      }
+    });
+  
+};
