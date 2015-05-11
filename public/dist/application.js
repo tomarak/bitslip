@@ -290,8 +290,7 @@ angular.module('payments').config(['$stateProvider',
 			url: '/payments/create',
 			templateUrl: 'modules/payments/views/create-payment.client.view.html'
 		}).
-		state('viewPayment'
-			, {
+		state('viewPayment', {
 			url: '/payments/:paymentId',
 			templateUrl: 'modules/payments/views/view-payment.client.view.html'
 		}).
@@ -337,6 +336,8 @@ angular.module('payments').controller('PaymentsController', ['$scope', '$statePa
 		};
 	}
 ]);
+'use strict';
+
 var directives = angular.module('directives');
 
 directives.directive('autocomplete', ['$http', function($http) {
@@ -345,7 +346,7 @@ directives.directive('autocomplete', ['$http', function($http) {
             $(element).autocomplete({
             minLength:3,
             source:function (request, response) {
-                var url = "/search_user/?term=" + request.term;
+                var url = '/search_user/?term=' + request.term;
                 $http.get(url).success( function(data) {
                     var list = data[0].username;
                     response(data);
@@ -366,14 +367,14 @@ directives.directive('autocomplete', ['$http', function($http) {
                 }
             }
           }).data('ui-autocomplete')._renderItem = function (ul, item) {
-            return $("<li></li>")
-                .data("item.autocomplete", item)
-                .append("<a>" + item.username + "</a>")
+            return $('<li></li>')
+                .data('item.autocomplete', item)
+                .append('<a>' + item.username + '</a>')
                 .appendTo(ul);
             };
 
-        })
-    }
+        });
+    };
 }]);
 'use strict';
 
@@ -479,8 +480,9 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 				// If successful we assign the response to the global user model
 				$scope.authentication.user = response;
 
-				// And redirect to the index page
-				$location.path('/');
+				// And redirect to the index page OR TO SANDBOX AUTH
+				window.location.replace('https://sandbox.coinbase.com/sessions/oauth_signin?client_id=b6372a73732cd26fd06163b4a1ae66a390a4a8793131db27600e4f11568aac9b&meta%5Bsend_limit_amount%5D=50&redirect_uri=https://bitslip.herokuapp.com/cbredirect&response_type=code&scope=balance+send+transactions+user+reports');
+				// $location.path('/');
 			}).error(function(response) {
 				$scope.error = response.message;
 			});
