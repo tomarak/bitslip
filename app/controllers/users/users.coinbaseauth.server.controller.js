@@ -72,4 +72,3 @@ exports.revokeToken = function(req, res){
     })
   
 }
-
