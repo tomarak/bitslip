@@ -13,7 +13,6 @@ directives.directive('autocomplete', ['$http', function($http) {
                     for(var i=0; i< data.length; i++){
                         scope.validUsernames.push(data[i].username);
                     }
-                    console.log(scope.validUsernames);
                     response(data);
                 });
             },
