@@ -7,7 +7,7 @@ var _ = require('lodash'),
 	errorHandler = require('../errors.server.controller'),
 	mongoose = require('mongoose'),
 	passport = require('passport'),
-	User = mongoose.model('User');
+	User = mongoose.model('User'),
 	coinbase = require('./users.coinbaseauth.server.controller');
 
 /**
